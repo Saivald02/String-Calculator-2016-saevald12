@@ -40,5 +40,22 @@ public class StringCalculatorTest
     {
     	assertEquals(21, StringCalculator.add("1,2,3,4,5,6"));
     }
+
+    @Test
+    public void testFirstNewLine()
+    {
+    	assertEquals(3, StringCalculator.add("1\n2"));
+    }
+    @Test
+    public void testSecondNewLine()
+    {
+    	assertEquals(21, StringCalculator.add("1\n2,3,4,5,6"));
+    }
+
+    @Test
+    public void testThirdNewLine()
+    {
+    	assertEquals(21, StringCalculator.add("1\n2\n3,4,5,6"));
+    }
 	
 }
