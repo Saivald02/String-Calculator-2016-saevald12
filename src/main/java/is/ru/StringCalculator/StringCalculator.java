@@ -8,6 +8,11 @@ public class StringCalculator
     	{
     		return 0;
     	}
+    	else if(text.contains("\n"))
+    	{
+    		String cleanText = cleanNumbers(text);
+    		return sum(splitNumbers(cleanText));
+    	}
     	else if(text.contains(","))
     	{
     		return sum(splitNumbers(text));
@@ -17,6 +22,25 @@ public class StringCalculator
     		return 1;
     	}
 	}
+
+	private static String cleanNumbers(String numbers)
+    {
+		char[] stringCleaner = numbers.toCharArray();
+		boolean strCleaned = false;
+		for(int i = 0; i < numbers.length(); i++)
+	        {
+	            if(stringCleaner[i] == '\n')
+	            {
+		        stringCleaner[i]= ',';
+		        strCleaned = true;
+		    } 
+	}
+	if(strCleaned == true)
+	{
+	    numbers = String.valueOf(stringCleaner);
+        }
+	return numbers;
+    }
 
 	private static int toInt(String number)
 	{
