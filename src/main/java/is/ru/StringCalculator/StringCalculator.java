@@ -20,9 +20,10 @@ public class StringCalculator
     	
     	String[] newNumbers = text.split(",");
 
-    	checkForNegativeNumbers(newNumbers);
+    	int[] arrayNumbers = checkForNegativeNumbers(newNumbers);
 
-    	return sum(newNumbers);
+
+    	return sum(arrayNumbers);
     	
 	}
 
@@ -41,6 +42,10 @@ public class StringCalculator
 		    {
 		    	hasNegativeNumber = true;
 		    	negIntList.add(arrayNumbers[i]);
+		    }
+		    if(arrayNumbers[i] > 1000)
+		    {
+		    	arrayNumbers[i] = 0;
 		    }
 		}
 
@@ -86,22 +91,12 @@ public class StringCalculator
 			return numbers;
     }
 
-	private static int toInt(String number)
-	{
-		return Integer.parseInt(number);
-	}
-
-	private static String[] splitNumbers(String numbers)
-	{
-		return numbers.split(",");
-	}
-
-	private static int sum(String[] numbers)
+	private static int sum(int arrayNumbers[])
 	{
 		int total = 0;
-		for(String number : numbers)
+		for(int i = 0; i < arrayNumbers.length; i++)
 		{
-			total += toInt(number);
+			total += arrayNumbers[i];
 		}
 		//System.out.println(total);
 		return total;
