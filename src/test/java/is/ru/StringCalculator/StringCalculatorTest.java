@@ -84,4 +84,22 @@ public class StringCalculatorTest
     	assertEquals(21, StringCalculator.add("-1\n-2\n-3,-4,-5,-6,-10"));
     }
 
+    @Test
+    public void testLargeNumber1()
+    {
+    	assertEquals(1001, StringCalculator.add("1000,1"));
+    }
+
+    @Test
+    public void testLargeNumber2()
+    {
+    	assertEquals(1, StringCalculator.add("1001,1"));
+    }
+
+    @Test
+    public void testLargeNumber3()
+    {
+    	assertEquals(1002, StringCalculator.add("1001,1"));
+    }
+
 }
