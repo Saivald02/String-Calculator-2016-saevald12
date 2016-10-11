@@ -2,6 +2,8 @@ package is.ru.StringCalculator;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+//import org.junit.rules.ExpectedException;
+//import org.junit.Rule;
 
 public class StringCalculatorTest
 {
@@ -16,6 +18,12 @@ public class StringCalculatorTest
     public void testOneNumber()
     {
     	assertEquals(1, StringCalculator.add("1"));
+    }
+
+    @Test
+    public void testOneNumberFail()
+    {
+    	assertEquals(2, StringCalculator.add("1"));
     }
 
     @Test
@@ -46,16 +54,34 @@ public class StringCalculatorTest
     {
     	assertEquals(3, StringCalculator.add("1\n2"));
     }
+
+    @Test
+    public void testFirstNewLineFail()
+    {
+    	assertEquals(4, StringCalculator.add("1\n2"));
+    }
     @Test
     public void testSecondNewLine()
     {
-    	assertEquals(21, StringCalculator.add("1\n2,3,4,5,6"));
+    	assertEquals(21, StringCalculator.add("1\n2,3\n4,5\n6"));
     }
 
     @Test
     public void testThirdNewLine()
     {
-    	assertEquals(21, StringCalculator.add("1\n2\n3,4,5,6"));
+    	assertEquals(21, StringCalculator.add("1\n2\n3\n4\n5\n6"));
     }
-	
+
+    @Test
+    public void testOneNegative()
+    {
+    	assertEquals(1, StringCalculator.add("-9"));
+    }
+
+    @Test
+    public void testMoreNegative()
+    {
+    	assertEquals(21, StringCalculator.add("-1\n-2\n-3,-4,-5,-6,-10"));
+    }
+
 }
