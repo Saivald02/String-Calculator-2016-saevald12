@@ -7,9 +7,9 @@ import org.junit.Test;
 
 public class StringCalculatorTest
 {
-    
-    @Test
-    public void testEmptyString()
+	
+	@Test
+	public void testEmptyString()
     {
     	assertEquals(0, StringCalculator.add(""));
     }
@@ -21,15 +21,15 @@ public class StringCalculatorTest
     }
 
     @Test
-    public void testOneNumberFail()
-    {
-    	assertEquals(2, StringCalculator.add("1"));
-    }
-
-    @Test
     public void testTwoNumbers()
     {
     	assertEquals(3, StringCalculator.add("1,2"));
+    }
+    
+    @Test
+    public void testOneNumberFail()
+    {
+    	assertEquals(2, StringCalculator.add("1"));
     }
 
     @Test
@@ -97,9 +97,32 @@ public class StringCalculatorTest
     }
 
     @Test
-    public void testLargeNumber3()
+    public void testLargeNumber3Fail()
     {
     	assertEquals(1002, StringCalculator.add("1001,1"));
+    }
+
+    @Test
+	public void testDelimiterTwoNumbers()
+    {
+    	assertEquals(3, StringCalculator.add("//;\n1;2"));
+    }
+
+    @Test
+	public void testDelimiterTwoNumbersFail()
+    {
+    	assertEquals(4, StringCalculator.add("//;\n1;2"));
+    }
+    @Test
+	public void testDelimiterMoreNumbers()
+    {
+    	assertEquals(13, StringCalculator.add("//;\n1;1;1;2;2;2;1;3"));
+    }
+
+    @Test
+	public void testDelimiterMoreNumbersNegativeFail()
+    {
+    	assertEquals(13, StringCalculator.add("//;\n1;-1;1;-2;2;2;1;-3"));
     }
 
 }
