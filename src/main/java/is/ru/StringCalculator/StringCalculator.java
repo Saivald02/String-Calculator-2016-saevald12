@@ -24,7 +24,7 @@ public class StringCalculator
     		int[] arrayNumbers = GetNumbers(newNumbers);
     		return sum(arrayNumbers);
     	}
-}
+    }
 
 	private static String checkForDelimiter(String text)
 	{
