@@ -12,24 +12,31 @@ public class StringCalculator
     		return 0;
     	}
     	
-    	if(text.contains("\n"))
+    	if(text.contains("//"))
     	{
-    		text = cleanNumbers(text);
-    		
+    		text = text.substring(4); 
+    		String[] newNumbers = text.split(checkForDelimiter(text));
+    		int[] arrayNumbers = GetNumbers(newNumbers);
+    		return sum(arrayNumbers);
     	}
-    	
-    	String[] newNumbers = text.split(",");
-
-    	int[] arrayNumbers = checkForNegativeNumbers(newNumbers);
-
-
-    	return sum(arrayNumbers);
-    	
+    	else
+    	{
+    		String[] newNumbers = text.split(",|\n");
+    		int[] arrayNumbers = GetNumbers(newNumbers);
+    		return sum(arrayNumbers);
+    	}
 	}
 
-	private static int[] checkForNegativeNumbers(String[] numbers)
+	private static String checkForDelimiter(String text)
 	{
-		
+		String delimiter = ",|\n";
+		int index = text.indexOf("//") + 2;
+		delimiter = delimiter + "|" + text.substring(index, index + 1);
+		return delimiter;
+	}
+
+	private static int[] GetNumbers(String[] numbers)
+	{
 		LinkedList<Integer> negIntList = new LinkedList<Integer>();
 		int[] arrayNumbers = new int[numbers.length];
 
@@ -51,45 +58,30 @@ public class StringCalculator
 
 		if(hasNegativeNumber)
 		{
-			String negNumbers = "";
-			int counter = 0;
-			for(Integer number : negIntList)
-			{
-				counter++;
-				if(counter == negIntList.size())
-				{
-					negNumbers += number;
-				}
-				else
-				{
-					negNumbers += number + ", ";
-				}
-			    
-			}
-			throw new IllegalArgumentException("Negatives not allowed: " + negNumbers);
-		}
+			negativeException(negIntList);
+		}	
 		return arrayNumbers;
 	}
 
-	private static String cleanNumbers(String numbers)
-    {
-		char[] stringCleaner = numbers.toCharArray();
-		boolean strCleaned = false;
-		for(int i = 0; i < numbers.length(); i++)
-	        {
-	            if(stringCleaner[i] == '\n')
-	            {
-		        stringCleaner[i] = ',';
-		        strCleaned = true;
-		    } 
-		}
-	
-		if(strCleaned == true)
+	private static void negativeException(LinkedList<Integer> negIntList)
+	{
+		String negNumbers = "";
+		int counter = 0;
+		for(Integer number : negIntList)
 		{
-		    numbers = String.valueOf(stringCleaner);
-	    }
-			return numbers;
-    }
+			counter++;
+			if(counter == negIntList.size())
+			{
+				negNumbers += number;
+			}
+			else
+			{
+				negNumbers += number + ", ";
+			}
+		}
+		throw new IllegalArgumentException("Negatives not allowed: " + negNumbers);
+		
+	}
 
 	private static int sum(int arrayNumbers[])
 	{
@@ -98,7 +90,6 @@ public class StringCalculator
 		{
 			total += arrayNumbers[i];
 		}
-		//System.out.println(total);
 		return total;
 	}
 }
