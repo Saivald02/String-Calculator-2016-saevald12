@@ -79,7 +79,6 @@ public class StringCalculator
 			}
 		}
 		throw new IllegalArgumentException("Negatives not allowed: " + negNumbers);
-		
 	}
 
 	private static int sum(int arrayNumbers[])
